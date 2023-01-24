@@ -6,8 +6,32 @@
 // Sconto del 40 % per gli over 65.
 
 // MILESTONE 1:
-// Iniziamo implementando il programma senza alcuna estetica: usando esclusivamente due input e un bottone(non stilizzati), realizziamo le specifiche scritte sopra.La risposta finale(o output) sarà anch'essa da scrivere in console.
+// Iniziamo implementando il programma senza alcuna estetica: usando esclusivamente due input e un bottone(non stilizzati), realizziamo le specifiche scritte sopra. La risposta finale (o output) sarà anch'essa da scrivere in console.
 
-// MILESTONE 2:
-// Solo una volta che il milestone 1 sarà completo e funzionante allora realizzeremo un form in pagina in cui l'utente potrà inserire i dati e visualizzare il calcolo finale con il prezzo.
-// Il recap dei dati e l'output del prezzo finale, andranno quindi stampati in pagina (il prezzo dovrà essere formattato con massimo due decimali, per indicare i centesimi sul prezzo).
+const button = document.getElementById("calculate");
+
+button.addEventListener("click",
+    function () {
+
+        // CHIEDERE KM DA PERCORRERE
+        const km = parseFloat(document.getElementById("km").value);
+        console.log("I km che devi percorrere sono " + km);
+
+        // CHIEDERE ETÀ PASSEGGERO
+        const age = parseInt(document.getElementById("age").value);
+        console.log("Hai " + age + " anni");
+
+        // CALCOLARE PREZZO TOTALE BIGLIETTO
+        let price = (0.21 * km);
+        console.log("Il prezzo totale è €" + price);
+
+        // CALCOLO GLI SCONTI
+        // 20%
+        const discount20 = (price * .2)
+        console.log("Lo sconto applicato per i minorenni è di " + discount20);
+
+        // 40%
+        const discount40 = (price * .4)
+        console.log("Lo sconto applicato per le persone che hanno 65 anni o più è di " + discount40);
+    }
+)
