@@ -1,37 +1,66 @@
-// CHIEDERE KM DA PERCORRERE
 // CHIEDERE ETÀ PASSEGGERO
+// CHIEDERE KM DA PERCORRERE
 // CALCOLARE PREZZO TOTALE BIGLIETTO
 // Il prezzo del biglietto è definito in base ai km(0.21 € al km)
 // Sconto del 20 % per i minorenni
-// Sconto del 40 % per gli over 65.
+// Sconto del 40 % per gli over 65
 
 // MILESTONE 1:
 // Iniziamo implementando il programma senza alcuna estetica: usando esclusivamente due input e un bottone(non stilizzati), realizziamo le specifiche scritte sopra. La risposta finale (o output) sarà anch'essa da scrivere in console.
 
-const button = document.getElementById("calculate");
+const buttonCalculateEl = document.getElementById("calculate");
+const inputAgeEl = document.getElementById("userAge");
+const inputKmEl = document.getElementById("userKm");
 
-button.addEventListener("click",
+console.log("On load age value:", inputAgeEl.value);
+
+buttonCalculateEl.addEventListener("click",
     function () {
-
-        // CHIEDERE KM DA PERCORRERE
-        const km = parseFloat(document.getElementById("km").value);
-        console.log("I km che devi percorrere sono " + km);
+        const pricePerKm = 0.21;
+        let outputMessage;
 
         // CHIEDERE ETÀ PASSEGGERO
-        const age = parseInt(document.getElementById("age").value);
-        console.log("Hai " + age + " anni");
+        const userAge = inputAgeEl.value;
+
+        // CHIEDERE KM DA PERCORRERE
+        const userKm = inputKmEl.value;
 
         // CALCOLARE PREZZO TOTALE BIGLIETTO
-        let price = (0.21 * km);
-        console.log("Il prezzo totale è €" + price);
+        let price = userKm * pricePerKm;
+        console.log("Il prezzo non scontato è € " + price);
 
-        // CALCOLO GLI SCONTI
-        // 20%
-        const discount20 = (price * .2)
-        console.log("Lo sconto applicato per i minorenni è di " + discount20);
+        // SE L'UTENTE È MINORENNE
+        if (userAge < 18) {
+            // Sconto del 20 % per i minorenni
+            const discountPercUnder18 = 20 / 100;
 
-        // 40%
-        const discount40 = (price * .4)
-        console.log("Lo sconto applicato per le persone che hanno 65 anni o più è di " + discount40);
+            // calcolo il prezzo scontato
+            const discountAmountUnder18 = price * discountPercUnder18;
+            console.log("Lo sconto under 18 è € " + discountAmountUnder18);
+
+            price = price - discountAmountUnder18;
+
+            outputMessage = "Il prezzo scontato under 18 è € " + price.toFixed(2);
+        }
+
+        // SE L'UTENTE È OVER 65
+        else if (userAge >= 65) {
+            // Sconto del 40 % per gli over 65
+            const discountPercOver65 = 40 / 100;
+
+            // calcolo il prezzo scontato
+            const discountAmountOver65 = price * discountPercOver65;
+            console.log("Lo sconto over 65 è € " + discountAmountOver65);
+
+            price = price - discountAmountOver65;
+
+            outputMessage = "Il prezzo scontato over 65 è € " + price.toFixed(2);
+        }
+
+        else {
+            outputMessage = "Il prezzo è € " + price.toFixed(2);
+        }
+
+        document.getElementById("resultMessage").innerHTML = outputMessage;
     }
 )
